@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SPAAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="IDCITA" />
+          </Key>
+          <Property Name="IDCITA" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDSERVICIO" Type="int" />
+          <Property Name="FECHACITA" Type="date" />
+          <Property Name="HORA" Type="int" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IDCLIENTE" />
+          </Key>
+          <Property Name="IDCLIENTE" Type="int" Nullable="false" />
+          <Property Name="NOMBRES" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHANACIMIENTO" Type="date" />
+          <Property Name="CORREO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EVALUACIONES">
+          <Key>
+            <PropertyRef Name="IDEVALUACIÓN" />
+          </Key>
+          <Property Name="IDEVALUACIÓN" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDSERVICIO" Type="int" />
+          <Property Name="FECHAEVALUACIÓN" Type="date" />
+          <Property Name="CALIFICACIÓN" Type="int" />
+          <Property Name="COMENTARIOS" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="HISTORIALCITAS">
+          <Key>
+            <PropertyRef Name="IDHISTORIALCITA" />
+          </Key>
+          <Property Name="IDHISTORIALCITA" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDSERVICIO" Type="int" />
+          <Property Name="FECHACITA" Type="date" />
+          <Property Name="HORA" Type="time" Precision="7" />
+          <Property Name="PROFESIONALASIGNADO" Type="varchar" MaxLength="50" />
+          <Property Name="CALIFICACIÓNSERVICIO" Type="int" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="HISTORIALCOMPRAS">
+          <Key>
+            <PropertyRef Name="IDHISTORIALCOMPRA" />
+          </Key>
+          <Property Name="IDHISTORIALCOMPRA" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDPRODUCTO" Type="int" />
+          <Property Name="FECHACOMPRA" Type="date" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIOTOTAL" Type="money" />
+        </EntityType>
+        <EntityType Name="MEMBRESiAS">
+          <Key>
+            <PropertyRef Name="IDMEMBRESIA" />
+          </Key>
+          <Property Name="IDMEMBRESIA" Type="int" Nullable="false" />
+          <Property Name="NOMBREMEMBRESIA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCIÓN" Type="varchar" MaxLength="200" />
+          <Property Name="PRECIO" Type="money" />
+          <Property Name="DURACION" Type="int" />
+          <Property Name="BENEFICIOS" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="NOMINA">
+          <Key>
+            <PropertyRef Name="IDNOMINA" />
+          </Key>
+          <Property Name="IDNOMINA" Type="int" Nullable="false" />
+          <Property Name="IDEMPLEADO" Type="int" />
+          <Property Name="SALARIO" Type="money" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="IDPRODUCTO" />
+          </Key>
+          <Property Name="IDPRODUCTO" Type="int" Nullable="false" />
+          <Property Name="NOMBREPRODUCTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCIÓN" Type="varchar" MaxLength="200" />
+          <Property Name="PRECIO" Type="money" />
+          <Property Name="TIPOPRODUCTO" Type="varchar" MaxLength="20" />
+          <Property Name="MARCA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PROFESIONAL">
+          <Key>
+            <PropertyRef Name="IDPROFESIONAL" />
+          </Key>
+          <Property Name="IDPROFESIONAL" Type="int" Nullable="false" />
+          <Property Name="NOMBRES" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ESPECIALIDAD" Type="varchar" MaxLength="50" />
+          <Property Name="AÑOSEXPERIENCIA" Type="int" />
+        </EntityType>
+        <EntityType Name="RESERVAS">
+          <Key>
+            <PropertyRef Name="IDRESERVA" />
+          </Key>
+          <Property Name="IDRESERVA" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDSERVICIO" Type="int" />
+          <Property Name="IDPROFESIONAL" Type="int" />
+          <Property Name="FECHARESERVA" Type="date" />
+          <Property Name="HORA" Type="time" Precision="7" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SERVICIO">
+          <Key>
+            <PropertyRef Name="IDSERVICIO" />
+          </Key>
+          <Property Name="IDSERVICIO" Type="int" Nullable="false" />
+          <Property Name="NOMBRESERVICIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" />
+          <Property Name="DURACION" Type="int" />
+          <Property Name="PRECIO" Type="money" />
+          <Property Name="TIPOSERVICIO" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SUSCRIPCIONES">
+          <Key>
+            <PropertyRef Name="IDSUSCRIPCIÓN" />
+          </Key>
+          <Property Name="IDSUSCRIPCIÓN" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDMEMBRESIA" Type="int" />
+          <Property Name="FECHAINICIO" Type="date" />
+          <Property Name="FECHAFIN" Type="date" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="VENTAS">
+          <Key>
+            <PropertyRef Name="IDVENTA" />
+          </Key>
+          <Property Name="IDVENTA" Type="int" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="int" />
+          <Property Name="IDPRODUCTO" Type="int" />
+          <Property Name="FECHAVENTA" Type="date" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIOTOTAL" Type="money" />
+          <Property Name="FORMAPAGO" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__CITA__IDCLIENTE__4F7CD00D">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CITA__IDSERVICIO__5070F446">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVALUACIO__IDCLI__6E01572D">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="EVALUACIONES" Type="Self.EVALUACIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="EVALUACIONES">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVALUACIO__IDSER__6EF57B66">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="EVALUACIONES" Type="Self.EVALUACIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="EVALUACIONES">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDCLI__6383C8BA">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="HISTORIALCITAS" Type="Self.HISTORIALCITAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="HISTORIALCITAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDCLI__6754599E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="HISTORIALCOMPRAS" Type="Self.HISTORIALCOMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="HISTORIALCOMPRAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDPRO__68487DD7">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+          <End Role="HISTORIALCOMPRAS" Type="Self.HISTORIALCOMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="HISTORIALCOMPRAS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDSER__6477ECF3">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="HISTORIALCITAS" Type="Self.HISTORIALCITAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="HISTORIALCITAS">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NOMINA__IDEMPLEA__6B24EA82">
+          <End Role="PROFESIONAL" Type="Self.PROFESIONAL" Multiplicity="0..1" />
+          <End Role="NOMINA" Type="Self.NOMINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESIONAL">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Principal>
+            <Dependent Role="NOMINA">
+              <PropertyRef Name="IDEMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDCLIE__534D60F1">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDPROF__5535A963">
+          <End Role="PROFESIONAL" Type="Self.PROFESIONAL" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESIONAL">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDSERV__5441852A">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUSCRIPCI__IDCLI__5FB337D6">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="SUSCRIPCIONES" Type="Self.SUSCRIPCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="SUSCRIPCIONES">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUSCRIPCI__IDMEM__60A75C0F">
+          <End Role="MEMBRESiAS" Type="Self.MEMBRESiAS" Multiplicity="0..1" />
+          <End Role="SUSCRIPCIONES" Type="Self.SUSCRIPCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBRESiAS">
+              <PropertyRef Name="IDMEMBRESIA" />
+            </Principal>
+            <Dependent Role="SUSCRIPCIONES">
+              <PropertyRef Name="IDMEMBRESIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDCLIENT__59FA5E80">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDPRODUC__5AEE82B9">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SPAAModelStoreContainer">
+          <EntitySet Name="CITA" EntityType="Self.CITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVALUACIONES" EntityType="Self.EVALUACIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORIALCITAS" EntityType="Self.HISTORIALCITAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORIALCOMPRAS" EntityType="Self.HISTORIALCOMPRAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBRESiAS" EntityType="Self.MEMBRESiAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOMINA" EntityType="Self.NOMINA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROFESIONAL" EntityType="Self.PROFESIONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESERVAS" EntityType="Self.RESERVAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIO" EntityType="Self.SERVICIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUSCRIPCIONES" EntityType="Self.SUSCRIPCIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CITA__IDCLIENTE__4F7CD00D" Association="Self.FK__CITA__IDCLIENTE__4F7CD00D">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CITA__IDSERVICIO__5070F446" Association="Self.FK__CITA__IDSERVICIO__5070F446">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVALUACIO__IDCLI__6E01572D" Association="Self.FK__EVALUACIO__IDCLI__6E01572D">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="EVALUACIONES" EntitySet="EVALUACIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVALUACIO__IDSER__6EF57B66" Association="Self.FK__EVALUACIO__IDSER__6EF57B66">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="EVALUACIONES" EntitySet="EVALUACIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDCLI__6383C8BA" Association="Self.FK__HISTORIAL__IDCLI__6383C8BA">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="HISTORIALCITAS" EntitySet="HISTORIALCITAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDCLI__6754599E" Association="Self.FK__HISTORIAL__IDCLI__6754599E">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="HISTORIALCOMPRAS" EntitySet="HISTORIALCOMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDPRO__68487DD7" Association="Self.FK__HISTORIAL__IDPRO__68487DD7">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="HISTORIALCOMPRAS" EntitySet="HISTORIALCOMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDSER__6477ECF3" Association="Self.FK__HISTORIAL__IDSER__6477ECF3">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="HISTORIALCITAS" EntitySet="HISTORIALCITAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NOMINA__IDEMPLEA__6B24EA82" Association="Self.FK__NOMINA__IDEMPLEA__6B24EA82">
+            <End Role="PROFESIONAL" EntitySet="PROFESIONAL" />
+            <End Role="NOMINA" EntitySet="NOMINA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDCLIE__534D60F1" Association="Self.FK__RESERVAS__IDCLIE__534D60F1">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDPROF__5535A963" Association="Self.FK__RESERVAS__IDPROF__5535A963">
+            <End Role="PROFESIONAL" EntitySet="PROFESIONAL" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDSERV__5441852A" Association="Self.FK__RESERVAS__IDSERV__5441852A">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUSCRIPCI__IDCLI__5FB337D6" Association="Self.FK__SUSCRIPCI__IDCLI__5FB337D6">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="SUSCRIPCIONES" EntitySet="SUSCRIPCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUSCRIPCI__IDMEM__60A75C0F" Association="Self.FK__SUSCRIPCI__IDMEM__60A75C0F">
+            <End Role="MEMBRESiAS" EntitySet="MEMBRESiAS" />
+            <End Role="SUSCRIPCIONES" EntitySet="SUSCRIPCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDCLIENT__59FA5E80" Association="Self.FK__VENTAS__IDCLIENT__59FA5E80">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDPRODUC__5AEE82B9" Association="Self.FK__VENTAS__IDPRODUC__5AEE82B9">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SPAAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="IDCITA" />
+          </Key>
+          <Property Name="IDCITA" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDSERVICIO" Type="Int32" />
+          <Property Name="FECHACITA" Type="DateTime" Precision="0" />
+          <Property Name="HORA" Type="Int32" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CITA__IDCLIENTE__4F7CD00D" FromRole="CITA" ToRole="CLIENTE" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK__CITA__IDSERVICIO__5070F446" FromRole="CITA" ToRole="SERVICIO" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IDCLIENTE" />
+          </Key>
+          <Property Name="IDCLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
+          <Property Name="CORREO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK__CITA__IDCLIENTE__4F7CD00D" FromRole="CLIENTE" ToRole="CITA" />
+          <NavigationProperty Name="EVALUACIONES" Relationship="Self.FK__EVALUACIO__IDCLI__6E01572D" FromRole="CLIENTE" ToRole="EVALUACIONES" />
+          <NavigationProperty Name="HISTORIALCITAS" Relationship="Self.FK__HISTORIAL__IDCLI__6383C8BA" FromRole="CLIENTE" ToRole="HISTORIALCITAS" />
+          <NavigationProperty Name="HISTORIALCOMPRAS" Relationship="Self.FK__HISTORIAL__IDCLI__6754599E" FromRole="CLIENTE" ToRole="HISTORIALCOMPRAS" />
+          <NavigationProperty Name="RESERVAS" Relationship="Self.FK__RESERVAS__IDCLIE__534D60F1" FromRole="CLIENTE" ToRole="RESERVAS" />
+          <NavigationProperty Name="SUSCRIPCIONES" Relationship="Self.FK__SUSCRIPCI__IDCLI__5FB337D6" FromRole="CLIENTE" ToRole="SUSCRIPCIONES" />
+          <NavigationProperty Name="VENTAS" Relationship="Self.FK__VENTAS__IDCLIENT__59FA5E80" FromRole="CLIENTE" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="EVALUACIONE">
+          <Key>
+            <PropertyRef Name="IDEVALUACIÓN" />
+          </Key>
+          <Property Name="IDEVALUACIÓN" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDSERVICIO" Type="Int32" />
+          <Property Name="FECHAEVALUACIÓN" Type="DateTime" Precision="0" />
+          <Property Name="CALIFICACIÓN" Type="Int32" />
+          <Property Name="COMENTARIOS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__EVALUACIO__IDCLI__6E01572D" FromRole="EVALUACIONES" ToRole="CLIENTE" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK__EVALUACIO__IDSER__6EF57B66" FromRole="EVALUACIONES" ToRole="SERVICIO" />
+        </EntityType>
+        <EntityType Name="HISTORIALCITA">
+          <Key>
+            <PropertyRef Name="IDHISTORIALCITA" />
+          </Key>
+          <Property Name="IDHISTORIALCITA" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDSERVICIO" Type="Int32" />
+          <Property Name="FECHACITA" Type="DateTime" Precision="0" />
+          <Property Name="HORA" Type="Time" Precision="7" />
+          <Property Name="PROFESIONALASIGNADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CALIFICACIÓNSERVICIO" Type="Int32" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__HISTORIAL__IDCLI__6383C8BA" FromRole="HISTORIALCITAS" ToRole="CLIENTE" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK__HISTORIAL__IDSER__6477ECF3" FromRole="HISTORIALCITAS" ToRole="SERVICIO" />
+        </EntityType>
+        <EntityType Name="HISTORIALCOMPRA">
+          <Key>
+            <PropertyRef Name="IDHISTORIALCOMPRA" />
+          </Key>
+          <Property Name="IDHISTORIALCOMPRA" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDPRODUCTO" Type="Int32" />
+          <Property Name="FECHACOMPRA" Type="DateTime" Precision="0" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIOTOTAL" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__HISTORIAL__IDCLI__6754599E" FromRole="HISTORIALCOMPRAS" ToRole="CLIENTE" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__HISTORIAL__IDPRO__68487DD7" FromRole="HISTORIALCOMPRAS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="MEMBRESiA">
+          <Key>
+            <PropertyRef Name="IDMEMBRESIA" />
+          </Key>
+          <Property Name="IDMEMBRESIA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBREMEMBRESIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCIÓN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DURACION" Type="Int32" />
+          <Property Name="BENEFICIOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUSCRIPCIONES" Relationship="Self.FK__SUSCRIPCI__IDMEM__60A75C0F" FromRole="MEMBRESiAS" ToRole="SUSCRIPCIONES" />
+        </EntityType>
+        <EntityType Name="NOMINA">
+          <Key>
+            <PropertyRef Name="IDNOMINA" />
+          </Key>
+          <Property Name="IDNOMINA" Type="Int32" Nullable="false" />
+          <Property Name="IDEMPLEADO" Type="Int32" />
+          <Property Name="SALARIO" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="PROFESIONAL" Relationship="Self.FK__NOMINA__IDEMPLEA__6B24EA82" FromRole="NOMINA" ToRole="PROFESIONAL" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IDPRODUCTO" />
+          </Key>
+          <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBREPRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCIÓN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TIPOPRODUCTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HISTORIALCOMPRAS" Relationship="Self.FK__HISTORIAL__IDPRO__68487DD7" FromRole="PRODUCTOS" ToRole="HISTORIALCOMPRAS" />
+          <NavigationProperty Name="VENTAS" Relationship="Self.FK__VENTAS__IDPRODUC__5AEE82B9" FromRole="PRODUCTOS" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="PROFESIONAL">
+          <Key>
+            <PropertyRef Name="IDPROFESIONAL" />
+          </Key>
+          <Property Name="IDPROFESIONAL" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESPECIALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AÑOSEXPERIENCIA" Type="Int32" />
+          <NavigationProperty Name="NOMINAs" Relationship="Self.FK__NOMINA__IDEMPLEA__6B24EA82" FromRole="PROFESIONAL" ToRole="NOMINA" />
+          <NavigationProperty Name="RESERVAS" Relationship="Self.FK__RESERVAS__IDPROF__5535A963" FromRole="PROFESIONAL" ToRole="RESERVAS" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="IDRESERVA" />
+          </Key>
+          <Property Name="IDRESERVA" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDSERVICIO" Type="Int32" />
+          <Property Name="IDPROFESIONAL" Type="Int32" />
+          <Property Name="FECHARESERVA" Type="DateTime" Precision="0" />
+          <Property Name="HORA" Type="Time" Precision="7" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__RESERVAS__IDCLIE__534D60F1" FromRole="RESERVAS" ToRole="CLIENTE" />
+          <NavigationProperty Name="PROFESIONAL" Relationship="Self.FK__RESERVAS__IDPROF__5535A963" FromRole="RESERVAS" ToRole="PROFESIONAL" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK__RESERVAS__IDSERV__5441852A" FromRole="RESERVAS" ToRole="SERVICIO" />
+        </EntityType>
+        <EntityType Name="SERVICIO">
+          <Key>
+            <PropertyRef Name="IDSERVICIO" />
+          </Key>
+          <Property Name="IDSERVICIO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRESERVICIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DURACION" Type="Int32" />
+          <Property Name="PRECIO" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TIPOSERVICIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK__CITA__IDSERVICIO__5070F446" FromRole="SERVICIO" ToRole="CITA" />
+          <NavigationProperty Name="EVALUACIONES" Relationship="Self.FK__EVALUACIO__IDSER__6EF57B66" FromRole="SERVICIO" ToRole="EVALUACIONES" />
+          <NavigationProperty Name="HISTORIALCITAS" Relationship="Self.FK__HISTORIAL__IDSER__6477ECF3" FromRole="SERVICIO" ToRole="HISTORIALCITAS" />
+          <NavigationProperty Name="RESERVAS" Relationship="Self.FK__RESERVAS__IDSERV__5441852A" FromRole="SERVICIO" ToRole="RESERVAS" />
+        </EntityType>
+        <EntityType Name="SUSCRIPCIONE">
+          <Key>
+            <PropertyRef Name="IDSUSCRIPCIÓN" />
+          </Key>
+          <Property Name="IDSUSCRIPCIÓN" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDMEMBRESIA" Type="Int32" />
+          <Property Name="FECHAINICIO" Type="DateTime" Precision="0" />
+          <Property Name="FECHAFIN" Type="DateTime" Precision="0" />
+          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__SUSCRIPCI__IDCLI__5FB337D6" FromRole="SUSCRIPCIONES" ToRole="CLIENTE" />
+          <NavigationProperty Name="MEMBRESiA" Relationship="Self.FK__SUSCRIPCI__IDMEM__60A75C0F" FromRole="SUSCRIPCIONES" ToRole="MEMBRESiAS" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IDVENTA" />
+          </Key>
+          <Property Name="IDVENTA" Type="Int32" Nullable="false" />
+          <Property Name="IDCLIENTE" Type="Int32" />
+          <Property Name="IDPRODUCTO" Type="Int32" />
+          <Property Name="FECHAVENTA" Type="DateTime" Precision="0" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIOTOTAL" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FORMAPAGO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__VENTAS__IDCLIENT__59FA5E80" FromRole="VENTAS" ToRole="CLIENTE" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__VENTAS__IDPRODUC__5AEE82B9" FromRole="VENTAS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <Association Name="FK__CITA__IDCLIENTE__4F7CD00D">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CITA__IDSERVICIO__5070F446">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVALUACIO__IDCLI__6E01572D">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="EVALUACIONES" Type="Self.EVALUACIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="EVALUACIONES">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDCLI__6383C8BA">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="HISTORIALCITAS" Type="Self.HISTORIALCITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="HISTORIALCITAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDCLI__6754599E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="HISTORIALCOMPRAS" Type="Self.HISTORIALCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="HISTORIALCOMPRAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDCLIE__534D60F1">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUSCRIPCI__IDCLI__5FB337D6">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="SUSCRIPCIONES" Type="Self.SUSCRIPCIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="SUSCRIPCIONES">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDCLIENT__59FA5E80">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IDCLIENTE" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDCLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVALUACIO__IDSER__6EF57B66">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="EVALUACIONES" Type="Self.EVALUACIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="EVALUACIONES">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDSER__6477ECF3">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="HISTORIALCITAS" Type="Self.HISTORIALCITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="HISTORIALCITAS">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__IDPRO__68487DD7">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="HISTORIALCOMPRAS" Type="Self.HISTORIALCOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="HISTORIALCOMPRAS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUSCRIPCI__IDMEM__60A75C0F">
+          <End Role="MEMBRESiAS" Type="Self.MEMBRESiA" Multiplicity="0..1" />
+          <End Role="SUSCRIPCIONES" Type="Self.SUSCRIPCIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBRESiAS">
+              <PropertyRef Name="IDMEMBRESIA" />
+            </Principal>
+            <Dependent Role="SUSCRIPCIONES">
+              <PropertyRef Name="IDMEMBRESIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NOMINA__IDEMPLEA__6B24EA82">
+          <End Role="PROFESIONAL" Type="Self.PROFESIONAL" Multiplicity="0..1" />
+          <End Role="NOMINA" Type="Self.NOMINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESIONAL">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Principal>
+            <Dependent Role="NOMINA">
+              <PropertyRef Name="IDEMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__IDPRODUC__5AEE82B9">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="VENTAS" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="IDPRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDPROF__5535A963">
+          <End Role="PROFESIONAL" Type="Self.PROFESIONAL" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESIONAL">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDPROFESIONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVAS__IDSERV__5441852A">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="RESERVAS" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="RESERVAS">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SPAAEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CITAs" EntityType="Self.CITA" />
+          <EntitySet Name="CLIENTEs" EntityType="Self.CLIENTE" />
+          <EntitySet Name="EVALUACIONES" EntityType="Self.EVALUACIONE" />
+          <EntitySet Name="HISTORIALCITAS" EntityType="Self.HISTORIALCITA" />
+          <EntitySet Name="HISTORIALCOMPRAS" EntityType="Self.HISTORIALCOMPRA" />
+          <EntitySet Name="MEMBRESiAS" EntityType="Self.MEMBRESiA" />
+          <EntitySet Name="NOMINAs" EntityType="Self.NOMINA" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROFESIONALs" EntityType="Self.PROFESIONAL" />
+          <EntitySet Name="RESERVAS" EntityType="Self.RESERVA" />
+          <EntitySet Name="SERVICIOs" EntityType="Self.SERVICIO" />
+          <EntitySet Name="SUSCRIPCIONES" EntityType="Self.SUSCRIPCIONE" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTA" />
+          <AssociationSet Name="FK__CITA__IDCLIENTE__4F7CD00D" Association="Self.FK__CITA__IDCLIENTE__4F7CD00D">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CITA__IDSERVICIO__5070F446" Association="Self.FK__CITA__IDSERVICIO__5070F446">
+            <End Role="SERVICIO" EntitySet="SERVICIOs" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVALUACIO__IDCLI__6E01572D" Association="Self.FK__EVALUACIO__IDCLI__6E01572D">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="EVALUACIONES" EntitySet="EVALUACIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDCLI__6383C8BA" Association="Self.FK__HISTORIAL__IDCLI__6383C8BA">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="HISTORIALCITAS" EntitySet="HISTORIALCITAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDCLI__6754599E" Association="Self.FK__HISTORIAL__IDCLI__6754599E">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="HISTORIALCOMPRAS" EntitySet="HISTORIALCOMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDCLIE__534D60F1" Association="Self.FK__RESERVAS__IDCLIE__534D60F1">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUSCRIPCI__IDCLI__5FB337D6" Association="Self.FK__SUSCRIPCI__IDCLI__5FB337D6">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="SUSCRIPCIONES" EntitySet="SUSCRIPCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDCLIENT__59FA5E80" Association="Self.FK__VENTAS__IDCLIENT__59FA5E80">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVALUACIO__IDSER__6EF57B66" Association="Self.FK__EVALUACIO__IDSER__6EF57B66">
+            <End Role="SERVICIO" EntitySet="SERVICIOs" />
+            <End Role="EVALUACIONES" EntitySet="EVALUACIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDSER__6477ECF3" Association="Self.FK__HISTORIAL__IDSER__6477ECF3">
+            <End Role="SERVICIO" EntitySet="SERVICIOs" />
+            <End Role="HISTORIALCITAS" EntitySet="HISTORIALCITAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__IDPRO__68487DD7" Association="Self.FK__HISTORIAL__IDPRO__68487DD7">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="HISTORIALCOMPRAS" EntitySet="HISTORIALCOMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUSCRIPCI__IDMEM__60A75C0F" Association="Self.FK__SUSCRIPCI__IDMEM__60A75C0F">
+            <End Role="MEMBRESiAS" EntitySet="MEMBRESiAS" />
+            <End Role="SUSCRIPCIONES" EntitySet="SUSCRIPCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NOMINA__IDEMPLEA__6B24EA82" Association="Self.FK__NOMINA__IDEMPLEA__6B24EA82">
+            <End Role="PROFESIONAL" EntitySet="PROFESIONALs" />
+            <End Role="NOMINA" EntitySet="NOMINAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__IDPRODUC__5AEE82B9" Association="Self.FK__VENTAS__IDPRODUC__5AEE82B9">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDPROF__5535A963" Association="Self.FK__RESERVAS__IDPROF__5535A963">
+            <End Role="PROFESIONAL" EntitySet="PROFESIONALs" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVAS__IDSERV__5441852A" Association="Self.FK__RESERVAS__IDSERV__5441852A">
+            <End Role="SERVICIO" EntitySet="SERVICIOs" />
+            <End Role="RESERVAS" EntitySet="RESERVAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SPAAModelStoreContainer" CdmEntityContainer="SPAAEntities1">
+          <EntitySetMapping Name="CITAs">
+            <EntityTypeMapping TypeName="SPAAModel.CITA">
+              <MappingFragment StoreEntitySet="CITA">
+                <ScalarProperty Name="IDCITA" ColumnName="IDCITA" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="FECHACITA" ColumnName="FECHACITA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTEs">
+            <EntityTypeMapping TypeName="SPAAModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVALUACIONES">
+            <EntityTypeMapping TypeName="SPAAModel.EVALUACIONE">
+              <MappingFragment StoreEntitySet="EVALUACIONES">
+                <ScalarProperty Name="IDEVALUACIÓN" ColumnName="IDEVALUACIÓN" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="FECHAEVALUACIÓN" ColumnName="FECHAEVALUACIÓN" />
+                <ScalarProperty Name="CALIFICACIÓN" ColumnName="CALIFICACIÓN" />
+                <ScalarProperty Name="COMENTARIOS" ColumnName="COMENTARIOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIALCITAS">
+            <EntityTypeMapping TypeName="SPAAModel.HISTORIALCITA">
+              <MappingFragment StoreEntitySet="HISTORIALCITAS">
+                <ScalarProperty Name="IDHISTORIALCITA" ColumnName="IDHISTORIALCITA" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="FECHACITA" ColumnName="FECHACITA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
+                <ScalarProperty Name="PROFESIONALASIGNADO" ColumnName="PROFESIONALASIGNADO" />
+                <ScalarProperty Name="CALIFICACIÓNSERVICIO" ColumnName="CALIFICACIÓNSERVICIO" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIALCOMPRAS">
+            <EntityTypeMapping TypeName="SPAAModel.HISTORIALCOMPRA">
+              <MappingFragment StoreEntitySet="HISTORIALCOMPRAS">
+                <ScalarProperty Name="IDHISTORIALCOMPRA" ColumnName="IDHISTORIALCOMPRA" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+                <ScalarProperty Name="FECHACOMPRA" ColumnName="FECHACOMPRA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIOTOTAL" ColumnName="PRECIOTOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBRESiAS">
+            <EntityTypeMapping TypeName="SPAAModel.MEMBRESiA">
+              <MappingFragment StoreEntitySet="MEMBRESiAS">
+                <ScalarProperty Name="IDMEMBRESIA" ColumnName="IDMEMBRESIA" />
+                <ScalarProperty Name="NOMBREMEMBRESIA" ColumnName="NOMBREMEMBRESIA" />
+                <ScalarProperty Name="DESCRIPCIÓN" ColumnName="DESCRIPCIÓN" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="DURACION" ColumnName="DURACION" />
+                <ScalarProperty Name="BENEFICIOS" ColumnName="BENEFICIOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOMINAs">
+            <EntityTypeMapping TypeName="SPAAModel.NOMINA">
+              <MappingFragment StoreEntitySet="NOMINA">
+                <ScalarProperty Name="IDNOMINA" ColumnName="IDNOMINA" />
+                <ScalarProperty Name="IDEMPLEADO" ColumnName="IDEMPLEADO" />
+                <ScalarProperty Name="SALARIO" ColumnName="SALARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="SPAAModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+                <ScalarProperty Name="NOMBREPRODUCTO" ColumnName="NOMBREPRODUCTO" />
+                <ScalarProperty Name="DESCRIPCIÓN" ColumnName="DESCRIPCIÓN" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="TIPOPRODUCTO" ColumnName="TIPOPRODUCTO" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROFESIONALs">
+            <EntityTypeMapping TypeName="SPAAModel.PROFESIONAL">
+              <MappingFragment StoreEntitySet="PROFESIONAL">
+                <ScalarProperty Name="IDPROFESIONAL" ColumnName="IDPROFESIONAL" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="ESPECIALIDAD" ColumnName="ESPECIALIDAD" />
+                <ScalarProperty Name="AÑOSEXPERIENCIA" ColumnName="AÑOSEXPERIENCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVAS">
+            <EntityTypeMapping TypeName="SPAAModel.RESERVA">
+              <MappingFragment StoreEntitySet="RESERVAS">
+                <ScalarProperty Name="IDRESERVA" ColumnName="IDRESERVA" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="IDPROFESIONAL" ColumnName="IDPROFESIONAL" />
+                <ScalarProperty Name="FECHARESERVA" ColumnName="FECHARESERVA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOs">
+            <EntityTypeMapping TypeName="SPAAModel.SERVICIO">
+              <MappingFragment StoreEntitySet="SERVICIO">
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="NOMBRESERVICIO" ColumnName="NOMBRESERVICIO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="DURACION" ColumnName="DURACION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="TIPOSERVICIO" ColumnName="TIPOSERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUSCRIPCIONES">
+            <EntityTypeMapping TypeName="SPAAModel.SUSCRIPCIONE">
+              <MappingFragment StoreEntitySet="SUSCRIPCIONES">
+                <ScalarProperty Name="IDSUSCRIPCIÓN" ColumnName="IDSUSCRIPCIÓN" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDMEMBRESIA" ColumnName="IDMEMBRESIA" />
+                <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+                <ScalarProperty Name="FECHAFIN" ColumnName="FECHAFIN" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SPAAModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAS">
+            <EntityTypeMapping TypeName="SPAAModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTAS">
+                <ScalarProperty Name="IDVENTA" ColumnName="IDVENTA" />
+                <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
+                <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+                <ScalarProperty Name="FECHAVENTA" ColumnName="FECHAVENTA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIOTOTAL" ColumnName="PRECIOTOTAL" />
+                <ScalarProperty Name="FORMAPAGO" ColumnName="FORMAPAGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
